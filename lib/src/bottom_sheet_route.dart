@@ -114,7 +114,7 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.modalBarrierColor,
     this.isDismissible = true,
     this.enableDrag = true,
-    @required this.expanded,
+    this.expanded = false,
     this.bounce = false,
     RouteSettings settings,
   })  : assert(expanded != null),
