@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../modal_bottom_sheet.dart';
 
-const Duration _bottomSheetDuration = Duration(milliseconds: 400);
-
 class _ModalBottomSheet<T> extends StatefulWidget {
   const _ModalBottomSheet({
     Key key,
@@ -40,6 +38,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
         return '';
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
+      case TargetPlatform.macOS:
         if (Localizations.of(context, MaterialLocalizations) != null) {
           return MaterialLocalizations.of(context).dialogLabel;
         } else {
@@ -116,6 +115,7 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.enableDrag = true,
     this.expanded = false,
     this.bounce = false,
+    this.duration,
     RouteSettings settings,
   })  : assert(expanded != null),
         assert(isDismissible != null),
@@ -130,11 +130,12 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
   final bool isDismissible;
   final bool enableDrag;
   final ScrollController scrollController;
+  final Duration duration;
 
   final AnimationController secondAnimationController;
 
   @override
-  Duration get transitionDuration => _bottomSheetDuration;
+  Duration get transitionDuration => Duration(milliseconds: 400);
 
   @override
   bool get barrierDismissible => isDismissible;
@@ -151,7 +152,7 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
   AnimationController createAnimationController() {
     assert(_animationController == null);
     _animationController =
-        ModalBottomSheet.createAnimationController(navigator.overlay);
+        ModalBottomSheet.createAnimationController(navigator.overlay, duration);
     return _animationController;
   }
 

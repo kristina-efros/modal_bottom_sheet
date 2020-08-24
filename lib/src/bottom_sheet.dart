@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-const Duration _bottomSheetDuration = Duration(milliseconds: 400);
 const double _minFlingVelocity = 500.0;
 const double _closeProgressThreshold = 0.5;
 const double _willPopThreshold = 0.8;
@@ -102,9 +101,9 @@ class ModalBottomSheet extends StatefulWidget {
   /// This API available as a convenience for a Material compliant bottom sheet
   /// animation. If alternative animation durations are required, a different
   /// animation controller could be provided.
-  static AnimationController createAnimationController(TickerProvider vsync) {
+  static AnimationController createAnimationController(TickerProvider vsync, Duration duration) {
     return AnimationController(
-      duration: _bottomSheetDuration,
+      duration: duration,
       debugLabel: 'BottomSheet',
       vsync: vsync,
     );
